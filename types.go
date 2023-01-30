@@ -5,4 +5,5 @@ package pointerhelpers
 type PointerHelper struct {
 	StringHelper
 	Int64Helper
+	BoolHelper
 }
