@@ -4,4 +4,5 @@ package pointerhelpers
 // in this module to enable easier composition outside of this package
 type PointerHelper struct {
 	StringHelper
+	Int64Helper
 }

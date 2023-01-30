@@ -5,26 +5,23 @@ import (
 	"testing"
 )
 
-// testify
-
-func TestString(t *testing.T) {
-	h := StringHelper{}
-	want := "foo"
-	got := h.String(want)
+func TestInt64(t *testing.T) {
+	h := Int64Helper{}
+	want := int64(42)
+	got := h.Int64(want)
 	assert.EqualValues(t, want, *got)
 }
 
-func TestStringValue(t *testing.T) {
-	t.Run("when nil returns empty string", func(t *testing.T) {
-		h := StringHelper{}
-		want := ""
-		got := h.StringValue(nil)
-		assert.Equal(t, want, got)
+func TestInt64Value(t *testing.T) {
+	t.Run("when nil returns 0", func(t *testing.T) {
+		h := Int64Helper{}
+		got := h.Int64Value(nil)
+		assert.Equal(t, int64(0), got)
 	})
-	t.Run("when set returns the given string", func(t *testing.T) {
-		h := StringHelper{}
-		want := "foobar"
-		got := h.StringValue(String(want))
-		assert.Equal(t, want, got)
+	t.Run("when set returns the given int64", func(t *testing.T) {
+		h := Int64Helper{}
+		want := h.Int64(int64(42))
+		got := h.Int64Value(want)
+		assert.Equal(t, *want, got)
 	})
 }
