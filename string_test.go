@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestInt(t *testing.T) {
+func TestString(t *testing.T) {
 	h := StringHelper{}
 	want := "foo"
 	got := h.String(want)
