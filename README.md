@@ -34,6 +34,23 @@ func main() {
 }
 ```
 
+#### Embedding BoolHelper
+
+```go
+type MyStruct struct {
+    pointerhelpers.BoolHelper
+}
+
+func main() {
+    s := MyStruct{}
+    b := true
+    bPtr := s.Bool(b)
+    fmt.Println(*bPtr) // Output: true
+    nilBoolPtr := (*bool)(nil)
+    fmt.Println(s.BoolValue(nilBoolPtr)) // Output: false
+}
+```
+
 ### Integers
 
 #### int
@@ -53,6 +70,23 @@ func main() {
 
 	nilIntPtr := (*int)(nil)
 	fmt.Println(pointerhelpers.IntValue(nilIntPtr)) // Output: 0
+}
+```
+
+#### Embedding IntHelper
+
+```go
+type MyStruct struct {
+    pointerhelpers.IntHelper
+}
+
+func main() {
+    s := MyStruct{}
+    i := 42
+    iPtr := s.Int(i)
+    fmt.Println(*iPtr) // Output: 42
+    nilIntPtr := (*int)(nil)
+    fmt.Println(s.IntValue(nilIntPtr)) // Output: 0
 }
 ```
 
@@ -82,6 +116,23 @@ func main() {
 }
 ```
 
+#### Embedding Float32Helper
+
+```go
+type MyStruct struct {
+    pointerhelpers.Float32Helper
+}
+
+func main() {
+    s := MyStruct{}
+    f := float32(3.14)
+    fPtr := s.Float32(f)
+    fmt.Println(*fPtr) // Output: 3.14
+    nilFloat32Ptr := (*float32)(nil)
+    fmt.Println(s.Float32Value(nilFloat32Ptr)) // Output: 0
+}
+```
+
 #### float64
 
 ```go
@@ -99,6 +150,23 @@ func main() {
 
 	nilFloat64Ptr := (*float64)(nil)
 	fmt.Println(pointerhelpers.Float64Value(nilFloat64Ptr)) // Output: 0
+}
+```
+
+#### Embedding Float64Helper
+
+```go
+type MyStruct struct {
+    pointerhelpers.Float64Helper
+}
+
+func main() {
+    s := MyStruct{}
+    f := 3.14
+    fPtr := s.Float64(f)
+    fmt.Println(*fPtr) // Output: 3.14
+    nilFloat64Ptr := (*float64)(nil)
+    fmt.Println(s.Float64Value(nilFloat64Ptr)) // Output: 0
 }
 ```
 
@@ -124,6 +192,23 @@ func main() {
 }
 ```
 
+#### Embedding Complex64Helper
+
+```go
+type MyStruct struct {
+    pointerhelpers.Complex64Helper
+}
+
+func main() {
+    s := MyStruct{}
+    c := complex64(1 + 2i)
+    cPtr := s.Complex64(c)
+    fmt.Println(*cPtr) // Output: (1+2i)
+    nilComplex64Ptr := (*complex64)(nil)
+    fmt.Println(s.Complex64Value(nilComplex64Ptr)) // Output: (0+0i)
+}
+```
+
 #### complex128
 
 ```go
@@ -144,30 +229,20 @@ func main() {
 }
 ```
 
-#### Embedding Complex64Helper
-
-For users who want to embed `Complex64Helper` into their custom types to gain the pointer helper functionalities directly, the package provides the `Complex64Helper` struct.
+#### Embedding Complex128Helper
 
 ```go
-package main
-
-import (
-	"fmt"
-	"github.com/xorima/pointerhelpers"
-)
-
 type MyStruct struct {
-	pointerhelpers.Complex64Helper
+    pointerhelpers.Complex128Helper
 }
 
 func main() {
-	s := MyStruct{}
-	c := complex64(1 + 2i)
-	cPtr := s.Complex64(c)
-	fmt.Println(*cPtr) // Output: (1+2i)
-
-	nilComplex64Ptr := (*complex64)(nil)
-	fmt.Println(s.Complex64Value(nilComplex64Ptr)) // Output: (0+0i)
+    s := MyStruct{}
+    c := complex(1 + 2i)
+    cPtr := s.Complex128(c)
+    fmt.Println(*cPtr) // Output: (1+2i)
+    nilComplex128Ptr := (*complex128)(nil)
+    fmt.Println(s.Complex128Value(nilComplex128Ptr)) // Output: (0+0i)
 }
 ```
 
@@ -188,6 +263,23 @@ func main() {
 
 	nilStringPtr := (*string)(nil)
 	fmt.Println(pointerhelpers.StringValue(nilStringPtr)) // Output: ""
+}
+```
+
+#### Embedding StringHelper
+
+```go
+type MyStruct struct {
+    pointerhelpers.StringHelper
+}
+
+func main() {
+    s := MyStruct{}
+    str := "hello"
+    strPtr := s.String(str)
+    fmt.Println(*strPtr) // Output: hello
+    nilStringPtr := (*string)(nil)
+    fmt.Println(s.StringValue(nilStringPtr)) // Output: ""
 }
 ```
 
@@ -230,9 +322,24 @@ func main() {
 
 ### Structs
 
+- `BoolHelper`
+- `IntHelper`
+- `Int8Helper`
+- `Int16Helper`
+- `Int32Helper`
+- `Int64Helper`
+- `UIntHelper`
+- `UInt8Helper`
+- `UInt16Helper`
+- `UInt32Helper`
+- `UInt64Helper`
+- `Float32Helper`
+- `Float64Helper`
 - `Complex64Helper`
+- `Complex128Helper`
+- `StringHelper`
 
-The `Complex64Helper` struct can be embedded into your custom types to easily incorporate complex64 pointer helper methods.
+These helper structs can be embedded into your custom types to easily incorporate pointer helper methods for the respective data types.
 
 ## Contributing
 
@@ -240,8 +347,4 @@ Contributions are welcome! Please open an issue or submit a pull request with an
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-This README now includes information about the `Complex64Helper` struct and its usage. Feel free to customize it further based on your specific requirements.
+This project is licensed under the Apache 2 License - see the LICENSE file for details.
